@@ -13,17 +13,15 @@ class Animal:
 class Herbivore(Animal):
     def hide(self):
         self.hidden = not self.hidden
-        # print(f"{self.name} is hiding.")   
 
 class Carnivore(Animal):
-    def bite(self, animal):
-        if isinstance(animal, Carnivore):
+    def bite(self, animal: Animal) -> None:
+        if animal.hidden:
             return
-        elif isinstance(animal, Herbivore):
-            if animal.hidden:
-                return
-            else:
-                animal.health -= 50
-                if animal.health <= 0:
-                    Animal.alive.remove(animal)
-                    return
+        if not isinstance(animal, Herbivore):
+            return
+        animal.health -= 50
+        if animal.health <= 0:
+            Animal.alive.remove(animal)
+
+
