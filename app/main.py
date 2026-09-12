@@ -16,6 +16,7 @@ class Herbivore(Animal):
     def hide(self) -> None:
         self.hidden = not self.hidden
 
+
 class Carnivore(Animal):
     def bite(self, animal: Animal) -> None:
         if animal.hidden:
@@ -25,5 +26,3 @@ class Carnivore(Animal):
         animal.health -= 50
         if animal.health <= 0:
             Animal.alive.remove(animal)
-
-
