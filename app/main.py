@@ -1,11 +1,12 @@
 class Animal:
     alive = []
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, health: int | None = None) -> None:
         self.name = name
-        self.health = 100
+        self.health = health if health is not None else 100
         self.hidden = False
         Animal.alive.append(self)
+
 
     def __repr__(self) -> str:
         return (f"{{Name: {self.name}, Health: {self.health}, "
