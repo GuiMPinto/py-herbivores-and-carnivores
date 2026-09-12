@@ -7,24 +7,27 @@ class Animal:
         self.hidden = False
         Animal.alive.append(self)
 
-    @classmethod
     def __repr__(self):
         return f"{{Name: {self.name}, Health: {self.health}, \
                    Hidden: {self.hidden}}}"
     
 class Herbivore(Animal):
     def hide(self):
-        self.hidden = True
+        self.hidden = not self.hidden
         # print(f"{self.name} is hiding.")   
 
 class Сarnivore(Animal):
-    def bite(self, herbivore):
-        if not herbivore.hidden:
-            herbivore.health -= 50
-            print(f"{self.name} bit {herbivore.name}\
-                  . {herbivore.name}'s health is now {herbivore.health}.")
-            if herbivore.health <= 0:
-                print(f"{herbivore.name} has died.")
-                Animal.alive.remove(herbivore)
-        else:
-            print(f"{herbivore.name} is hiding and cannot be bitten.")
+    def bite(self, animal):
+        if isinstance(animal, Carnivore):
+            print("Cannot bite another carnivore!")
+            return
+        elif isinstance(animal, Herbivore):
+            if animal.hidden:
+                print(f"{animal.name} is hiding and cannot be bitten.")
+            else:
+                animal.health -= 50
+                print(f"{self.name} bit {animal.name}. {animal.name}'s health is now {animal.health}.")
+                if animal.health <= 0:
+                    print(f"{animal.name} has died.")
+                    Animal.alive.remove(animal)
+        
